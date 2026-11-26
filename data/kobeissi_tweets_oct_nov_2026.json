@@ -1,0 +1,617 @@
+[
+  {
+    "date": "2026-10-11",
+    "ticker": "USO",
+    "side": "long",
+    "tier": 3,
+    "catalyst": "Hormuz tanker strike",
+    "rubric": {
+      "directional_clarity": 5.0,
+      "instrument_specificity": 6.5,
+      "level_and_trigger": 4.5,
+      "evidence": 6.5,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-12",
+    "ticker": "WEAT",
+    "side": "long",
+    "tier": 2,
+    "catalyst": "Grain blockade headline",
+    "rubric": {
+      "directional_clarity": 3.5,
+      "instrument_specificity": 5.0,
+      "level_and_trigger": 2.5,
+      "evidence": 4.5,
+      "horizon": 2.5,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-10-12",
+    "ticker": "USO",
+    "side": "long",
+    "tier": 2,
+    "catalyst": "Oil strike headline (duplicate)",
+    "rubric": {
+      "directional_clarity": 4.5,
+      "instrument_specificity": 6.5,
+      "level_and_trigger": 4.0,
+      "evidence": 5.5,
+      "horizon": 2.5,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-10-14",
+    "ticker": "TLT",
+    "side": "short",
+    "tier": 3,
+    "catalyst": "Hot 3.7% CPI print",
+    "rubric": {
+      "directional_clarity": 4.0,
+      "instrument_specificity": 5.5,
+      "level_and_trigger": 6.5,
+      "evidence": 8.0,
+      "horizon": 3.0,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-10-14",
+    "ticker": "QQQ",
+    "side": "short",
+    "tier": 3,
+    "catalyst": "Hot 3.7% CPI mapped to Nasdaq",
+    "rubric": {
+      "directional_clarity": 4.5,
+      "instrument_specificity": 6.0,
+      "level_and_trigger": 6.5,
+      "evidence": 8.0,
+      "horizon": 3.0,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-10-14",
+    "ticker": "BAC",
+    "side": "short",
+    "tier": 4,
+    "catalyst": "$1.2B AML fine",
+    "rubric": {
+      "directional_clarity": 6.0,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 6.5,
+      "evidence": 7.5,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-15",
+    "ticker": "ITB",
+    "side": "short",
+    "tier": 2,
+    "catalyst": "Proxy ETF on pending home sales",
+    "rubric": {
+      "directional_clarity": 3.0,
+      "instrument_specificity": 4.0,
+      "level_and_trigger": 3.5,
+      "evidence": 5.0,
+      "horizon": 2.5,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-10-16",
+    "ticker": "ORCL",
+    "side": "long",
+    "tier": 4,
+    "catalyst": "Chased +10% FCF guide gap-up",
+    "rubric": {
+      "directional_clarity": 5.5,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 7.0,
+      "evidence": 7.0,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-19",
+    "ticker": "SPY",
+    "side": "long",
+    "tier": 1,
+    "catalyst": "Overdone selloff sentiment call",
+    "rubric": {
+      "directional_clarity": 2.5,
+      "instrument_specificity": 4.5,
+      "level_and_trigger": 2.0,
+      "evidence": 3.0,
+      "horizon": 2.0,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-10-20",
+    "ticker": "NFLX",
+    "side": "short",
+    "tier": 4,
+    "catalyst": "Weak guidance",
+    "rubric": {
+      "directional_clarity": 6.5,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 6.5,
+      "evidence": 7.5,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-21",
+    "ticker": "GDX",
+    "side": "long",
+    "tier": 1,
+    "catalyst": "Oversold breadth bounce setup",
+    "rubric": {
+      "directional_clarity": 2.5,
+      "instrument_specificity": 4.5,
+      "level_and_trigger": 2.5,
+      "evidence": 3.5,
+      "horizon": 2.0,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-10-21",
+    "ticker": "IBM",
+    "side": "long",
+    "tier": 4,
+    "catalyst": "AI-linked earnings beat",
+    "rubric": {
+      "directional_clarity": 5.5,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 6.0,
+      "evidence": 7.0,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-22",
+    "ticker": "TSLA",
+    "side": "long",
+    "tier": 2,
+    "catalyst": "Flying Roadster premarket pop",
+    "rubric": {
+      "directional_clarity": 3.0,
+      "instrument_specificity": 8.5,
+      "level_and_trigger": 2.0,
+      "evidence": 3.0,
+      "horizon": 1.5,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-10-22",
+    "ticker": "CMG",
+    "side": "short",
+    "tier": 3,
+    "catalyst": "Starbucks buyout denial",
+    "rubric": {
+      "directional_clarity": 4.5,
+      "instrument_specificity": 8.5,
+      "level_and_trigger": 4.0,
+      "evidence": 5.5,
+      "horizon": 2.0,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-10-23",
+    "ticker": "BA",
+    "side": "short",
+    "tier": 4,
+    "catalyst": "Loss + guide cut",
+    "rubric": {
+      "directional_clarity": 6.5,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 6.5,
+      "evidence": 7.5,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-24",
+    "ticker": "IBIT",
+    "side": "short",
+    "tier": 5,
+    "catalyst": "BTC < $80k liquidation flush",
+    "rubric": {
+      "directional_clarity": 6.0,
+      "instrument_specificity": 8.5,
+      "level_and_trigger": 7.5,
+      "evidence": 7.0,
+      "horizon": 2.5,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-25",
+    "ticker": "USO",
+    "side": "short",
+    "tier": 2,
+    "catalyst": "Trump no-strike comment",
+    "rubric": {
+      "directional_clarity": 4.0,
+      "instrument_specificity": 6.0,
+      "level_and_trigger": 3.0,
+      "evidence": 4.5,
+      "horizon": 2.0,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-10-25",
+    "ticker": "HYG",
+    "side": "short",
+    "tier": 3,
+    "catalyst": "CCC yields at 18%",
+    "rubric": {
+      "directional_clarity": 3.5,
+      "instrument_specificity": 5.5,
+      "level_and_trigger": 6.0,
+      "evidence": 7.0,
+      "horizon": 3.5,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-10-26",
+    "ticker": "META",
+    "side": "short",
+    "tier": 5,
+    "catalyst": "$95B stock sale for AI",
+    "rubric": {
+      "directional_clarity": 6.5,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 7.5,
+      "evidence": 8.0,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-26",
+    "ticker": "EWZ",
+    "side": "short",
+    "tier": 2,
+    "catalyst": "Lula election upset",
+    "rubric": {
+      "directional_clarity": 4.5,
+      "instrument_specificity": 5.5,
+      "level_and_trigger": 4.0,
+      "evidence": 6.0,
+      "horizon": 3.0,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-10-27",
+    "ticker": "MSFT",
+    "side": "long",
+    "tier": 4,
+    "catalyst": "Earnings beat gap-up",
+    "rubric": {
+      "directional_clarity": 5.5,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 6.5,
+      "evidence": 7.5,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-28",
+    "ticker": "NOW",
+    "side": "short",
+    "tier": 5,
+    "catalyst": "Weak quarter",
+    "rubric": {
+      "directional_clarity": 6.5,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 7.0,
+      "evidence": 8.0,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-28",
+    "ticker": "GOOGL",
+    "side": "short",
+    "tier": 4,
+    "catalyst": "Weak quarter",
+    "rubric": {
+      "directional_clarity": 6.0,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 6.5,
+      "evidence": 7.5,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-29",
+    "ticker": "META",
+    "side": "long",
+    "tier": 2,
+    "catalyst": "Beat overshadowed by $25B fine",
+    "rubric": {
+      "directional_clarity": 3.5,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 5.5,
+      "evidence": 7.0,
+      "horizon": 2.5,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-10-29",
+    "ticker": "AMZN",
+    "side": "short",
+    "tier": 4,
+    "catalyst": "Weak quarter",
+    "rubric": {
+      "directional_clarity": 6.0,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 6.5,
+      "evidence": 7.5,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-29",
+    "ticker": "INTC",
+    "side": "short",
+    "tier": 4,
+    "catalyst": "PC-demand miss",
+    "rubric": {
+      "directional_clarity": 6.5,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 7.0,
+      "evidence": 8.0,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-29",
+    "ticker": "RDDT",
+    "side": "short",
+    "tier": 5,
+    "catalyst": "Weak users & guide",
+    "rubric": {
+      "directional_clarity": 6.5,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 7.0,
+      "evidence": 8.0,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-29",
+    "ticker": "USO",
+    "side": "long",
+    "tier": 2,
+    "catalyst": "Strike rumor duplicate",
+    "rubric": {
+      "directional_clarity": 2.5,
+      "instrument_specificity": 5.5,
+      "level_and_trigger": 1.5,
+      "evidence": 2.5,
+      "horizon": 1.5,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-10-29",
+    "ticker": "IBIT",
+    "side": "short",
+    "tier": 5,
+    "catalyst": "Binance hack (~$5.7B outflows)",
+    "rubric": {
+      "directional_clarity": 7.0,
+      "instrument_specificity": 8.5,
+      "level_and_trigger": 7.5,
+      "evidence": 8.0,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-10-30",
+    "ticker": "CIBR",
+    "side": "long",
+    "tier": 1,
+    "catalyst": "Proxy ETF chase on Binance hack",
+    "rubric": {
+      "directional_clarity": 2.5,
+      "instrument_specificity": 3.5,
+      "level_and_trigger": 1.5,
+      "evidence": 3.0,
+      "horizon": 2.0,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-11-02",
+    "ticker": "USO",
+    "side": "short",
+    "tier": 2,
+    "catalyst": "Diplomatic end to Iran war",
+    "rubric": {
+      "directional_clarity": 4.5,
+      "instrument_specificity": 6.0,
+      "level_and_trigger": 4.0,
+      "evidence": 5.5,
+      "horizon": 2.5,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-11-02",
+    "ticker": "ORCL",
+    "side": "short",
+    "tier": 5,
+    "catalyst": "Major AI cloud/capex shock",
+    "rubric": {
+      "directional_clarity": 6.5,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 7.0,
+      "evidence": 8.0,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-11-03",
+    "ticker": "SHOP",
+    "side": "short",
+    "tier": 4,
+    "catalyst": "Missed Q3 expectations (-15%)",
+    "rubric": {
+      "directional_clarity": 6.5,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 7.0,
+      "evidence": 8.0,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-11-04",
+    "ticker": "USO",
+    "side": "short",
+    "tier": 3,
+    "catalyst": "Oil fell below $93 on sweep",
+    "rubric": {
+      "directional_clarity": 5.0,
+      "instrument_specificity": 6.5,
+      "level_and_trigger": 6.5,
+      "evidence": 7.0,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-11-05",
+    "ticker": "JPM",
+    "side": "short",
+    "tier": 3,
+    "catalyst": "CNBC Senate probe headline",
+    "rubric": {
+      "directional_clarity": 5.5,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 5.0,
+      "evidence": 7.5,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-11-07",
+    "ticker": "NVDA",
+    "side": "short",
+    "tier": 2,
+    "catalyst": "FT US officials China link report",
+    "rubric": {
+      "directional_clarity": 5.0,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 4.5,
+      "evidence": 7.0,
+      "horizon": 2.5,
+      "invalidation": 1.0
+    }
+  },
+  {
+    "date": "2026-11-12",
+    "ticker": "NVDA",
+    "side": "short",
+    "tier": 5,
+    "catalyst": "SEC/regulatory shock",
+    "rubric": {
+      "directional_clarity": 7.0,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 7.0,
+      "evidence": 8.5,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-11-12",
+    "ticker": "SMCI",
+    "side": "short",
+    "tier": 5,
+    "catalyst": "Accounting/guidance shock",
+    "rubric": {
+      "directional_clarity": 7.0,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 7.0,
+      "evidence": 8.0,
+      "horizon": 3.0,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-11-12",
+    "ticker": "IBIT",
+    "side": "short",
+    "tier": 3,
+    "catalyst": "BTC broke under $71,000",
+    "rubric": {
+      "directional_clarity": 5.5,
+      "instrument_specificity": 8.5,
+      "level_and_trigger": 7.0,
+      "evidence": 6.5,
+      "horizon": 2.5,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-11-14",
+    "ticker": "IBIT",
+    "side": "short",
+    "tier": 3,
+    "catalyst": "BTC broke under $66,000 ($215M liq)",
+    "rubric": {
+      "directional_clarity": 5.5,
+      "instrument_specificity": 8.5,
+      "level_and_trigger": 7.0,
+      "evidence": 6.5,
+      "horizon": 2.5,
+      "invalidation": 1.5
+    }
+  },
+  {
+    "date": "2026-11-16",
+    "ticker": "UAL",
+    "side": "short",
+    "tier": 3,
+    "catalyst": "Widespread system outage",
+    "rubric": {
+      "directional_clarity": 5.5,
+      "instrument_specificity": 9.0,
+      "level_and_trigger": 5.0,
+      "evidence": 7.0,
+      "horizon": 2.0,
+      "invalidation": 1.5
+    }
+  }
+]
