@@ -16,6 +16,7 @@ import urllib.request
 
 TWEETS_PATH = Path("/Users/yehudazahler/Downloads/tweets.jsonl")
 OUT_PATH = Path(__file__).resolve().parent / "backtest_1yr_results.json"
+TRADES_OUT_PATH = Path(__file__).resolve().parent.parent / "public" / "one-year" / "trades.json"
 CACHE_DIR = Path(__file__).resolve().parent / ".cache_1yr_ohlc"
 CACHE_DIR.mkdir(exist_ok=True)
 
@@ -202,7 +203,7 @@ def extract_signals():
                 continue
 
             signals.append({
-                "id": obj.get("id"),
+                "id": str(obj.get("id") or ""),
                 "date": dt_date,
                 "created_at": created,
                 "ticker": ticker,
@@ -211,7 +212,7 @@ def extract_signals():
                 "is_proxy": is_proxy,
                 "is_crypto": is_crypto,
                 "rubric6": (c1, c2, c3, c4, c5, c6),
-                "text": text[:140],
+                "text": text,
             })
 
     signals.sort(key=lambda s: (s["created_at"], s["ticker"]))
@@ -312,7 +313,7 @@ def eval_exit(bars, entry_idx, side, cfg, entry_field="open"):
 
     cal_days = max(1, (datetime.strptime(bars[exit_idx]["date"], "%Y-%m-%d") - datetime.strptime(bars[entry_idx]["date"], "%Y-%m-%d")).days)
     gross_ret = (entry - exit_price) / entry if side == "short" else (exit_price - entry) / entry
-    return bars[entry_idx]["date"], bars[exit_idx]["date"], cal_days, gross_ret
+    return bars[entry_idx]["date"], bars[exit_idx]["date"], cal_days, gross_ret, round(entry, 2), round(exit_price, 2)
 
 
 def simulate(events, cfg):
@@ -400,13 +401,22 @@ def simulate(events, cfg):
             continue
 
         notional = cash * leverage
-        ed, xd, cdays, gret = eval_exit(ev["bars"], ev["idx"], side, cfg, entry_field=ev["entry_field"])
+        ed, xd, cdays, gret, epx, xpx = eval_exit(ev["bars"], ev["idx"], side, cfg, entry_field=ev["entry_field"])
         slip = notional * 0.0020
         borrow = (notional * 0.03 * (cdays / 365.0)) if side == "short" else 0.0
         mint = max(0.0, notional - cash) * 0.065 * (cdays / 365.0)
         net_pnl = notional * gret - slip - borrow - mint
 
-        rec = {"ticker": sym, "side": side, "entry_date": ed, "exit_date": xd, "cash": cash, "net_pnl": round(net_pnl, 2)}
+        rec = {
+            "ticker": sym, "side": side, "entry_date": ed, "exit_date": xd,
+            "entry_px": epx, "exit_px": xpx, "hold_days": cdays,
+            "cash": round(cash, 2), "notional": round(notional, 2),
+            "gross_ret_pct": round(gret * 100.0, 2),
+            "net_pnl": round(net_pnl, 2),
+            "tier": tier, "shlomo": round(ev["shlomo_comp"], 2),
+            "gap_pct": round(ev["gap_pct"], 2), "day_chg": round(ev["day_chg"], 2),
+            "tid": ev.get("tid", ""),
+        }
         open_pos.append(rec)
         taken.append(rec)
         peak_cash = max(peak_cash, sum(op["cash"] for op in open_pos))
@@ -430,6 +440,7 @@ def simulate(events, cfg):
         "wr_pct": round(len(wins) / len(taken) * 100.0, 1) if taken else 0.0,
         "capital_base": round(denom, 2), "net_pnl": total_net, "roc_pct": roc,
         "pf": pf, "max_dd_pct": round(max_dd, 2),
+        "trade_log": taken,
     }
 
 
@@ -441,8 +452,10 @@ def simulate_spy_vibe(spy_bars, mode="long_cash", capital=25000.0):
     max_dd = 0.0
     pos = 0  # 1=long, -1=short, 0=cash
     entry_px = None
+    entry_date = None
     trades = wins = losses = 0
     gw = gl = 0.0
+    tlog = []
 
     for i in range(19, len(spy_bars)):
         b = spy_bars[i]
@@ -455,6 +468,7 @@ def simulate_spy_vibe(spy_bars, mode="long_cash", capital=25000.0):
         if target_pos != pos:
             if pos != 0 and entry_px:
                 ret = (b["close"] - entry_px) / entry_px if pos == 1 else (entry_px - b["close"]) / entry_px
+                cash_dep = round(eq, 2)
                 pnl = eq * ret - eq * 0.0020
                 eq += pnl
                 trades += 1
@@ -462,8 +476,18 @@ def simulate_spy_vibe(spy_bars, mode="long_cash", capital=25000.0):
                     wins += 1; gw += pnl
                 else:
                     losses += 1; gl += abs(pnl)
+                cdays = max(1, (datetime.strptime(b["date"], "%Y-%m-%d") - datetime.strptime(entry_date, "%Y-%m-%d")).days)
+                tlog.append({
+                    "ticker": "SPY", "side": "long" if pos == 1 else "short",
+                    "entry_date": entry_date, "exit_date": b["date"],
+                    "entry_px": round(entry_px, 2), "exit_px": round(b["close"], 2), "hold_days": cdays,
+                    "cash": cash_dep, "notional": cash_dep, "gross_ret_pct": round(ret * 100.0, 2),
+                    "net_pnl": round(pnl, 2), "tier": 0, "shlomo": 0.0, "gap_pct": 0.0, "day_chg": 0.0,
+                    "tid": "SPY_VIBE",
+                })
             pos = target_pos
             entry_px = b["close"] if pos != 0 else None
+            entry_date = b["date"] if pos != 0 else None
         mark_eq = eq
         if pos != 0 and entry_px:
             ret = (b["close"] - entry_px) / entry_px if pos == 1 else (entry_px - b["close"]) / entry_px
@@ -474,6 +498,7 @@ def simulate_spy_vibe(spy_bars, mode="long_cash", capital=25000.0):
     if pos != 0 and entry_px:
         b = spy_bars[-1]
         ret = (b["close"] - entry_px) / entry_px if pos == 1 else (entry_px - b["close"]) / entry_px
+        cash_dep = round(eq, 2)
         pnl = eq * ret - eq * 0.0020
         eq += pnl
         trades += 1
@@ -481,6 +506,15 @@ def simulate_spy_vibe(spy_bars, mode="long_cash", capital=25000.0):
             wins += 1; gw += pnl
         else:
             losses += 1; gl += abs(pnl)
+        cdays = max(1, (datetime.strptime(b["date"], "%Y-%m-%d") - datetime.strptime(entry_date, "%Y-%m-%d")).days)
+        tlog.append({
+            "ticker": "SPY", "side": "long" if pos == 1 else "short",
+            "entry_date": entry_date, "exit_date": b["date"],
+            "entry_px": round(entry_px, 2), "exit_px": round(b["close"], 2), "hold_days": cdays,
+            "cash": cash_dep, "notional": cash_dep, "gross_ret_pct": round(ret * 100.0, 2),
+            "net_pnl": round(pnl, 2), "tier": 0, "shlomo": 0.0, "gap_pct": 0.0, "day_chg": 0.0,
+            "tid": "SPY_VIBE",
+        })
 
     net = round(eq - capital, 2)
     return {
@@ -489,6 +523,7 @@ def simulate_spy_vibe(spy_bars, mode="long_cash", capital=25000.0):
         "capital_base": capital, "net_pnl": net, "roc_pct": round(net / capital * 100.0, 2),
         "pf": round(gw / gl, 2) if gl > 0 else ("INF" if gw > 0 else 0.0),
         "max_dd_pct": round(max_dd, 2),
+        "trade_log": tlog,
     }
 
 
@@ -542,7 +577,16 @@ def main():
             "bars": bars, "idx": idx, "atr": atr, "gap_pct": gap_pct, "day_chg": day_chg,
             "regime": spy_regime.get(bars[idx]["date"], "bull"),
             "shlomo_comp": comp, "entry_q": c7, "conflict_q": c8, "entry_field": "open",
+            "tid": s["id"],
         })
+
+    # Build tweet lookup table (deduplicated by tweet ID for compact trades.json)
+    tweet_lookup = {
+        s["id"]: {"created_at": s["created_at"], "text": s["text"]}
+        for s in raw_signals
+    }
+    tweet_lookup["MKT_ONLY"] = {"created_at": "", "text": "[Market-Only Technical Breakdown: -8% to -28% drop, red close, >=2x 20d avg volume — zero tweets used]"}
+    tweet_lookup["SPY_VIBE"] = {"created_at": "", "text": "[Pure S&P 500 Vibe Check: SPY Close vs. 20-Day SMA crossover — zero tweets used]"}
 
     # Build 1-year Market-Only breakdown events (-8% to -28%, red close, >= 2x avg vol)
     mkt_events = []
@@ -565,7 +609,7 @@ def main():
                 "bars": bars, "idx": i, "atr": compute_atr14_pct(bars, i - 1),
                 "gap_pct": (o - prev_c) / prev_c * 100.0, "day_chg": drop,
                 "regime": spy_regime.get(d, "bull"), "shlomo_comp": 6.0, "entry_q": 6.0, "conflict_q": 6.5,
-                "entry_field": "close",
+                "entry_field": "close", "tid": "MKT_ONLY",
             })
             last_idx = i
     mkt_events.sort(key=lambda e: (e["date"], e["ticker"]))
@@ -626,16 +670,31 @@ def main():
     ]
 
     results = []
+    variant_trades = {}
+    used_tids = set()
     for name, grp, evs, cfg in VARIANT_SPECS:
         r = simulate(evs, cfg)
+        tlog = r.pop("trade_log")
         results.append({"name": name, "group": grp, **r})
+        variant_trades[name] = {
+            "group": grp, **r, "trade_log": tlog,
+        }
+        for tr in tlog:
+            if tr.get("tid"):
+                used_tids.add(tr["tid"])
 
     # NEW USER-REQUESTED QUESTION 1: Pure S&P 500 Vibe Check (SPY vs 20-SMA, zero tweets)
-    spy_vibe_results = {
-        "SPY-Vibe-LongCash (SPY >= 20-SMA -> Long, else Cash)": simulate_spy_vibe(spy_bars, "long_cash", 25000.0),
-        "SPY-Vibe-LongShort (SPY >= 20-SMA -> Long, < 20-SMA -> Short)": simulate_spy_vibe(spy_bars, "long_short", 25000.0),
-        "SPY-BuyHold (1-Year S&P 500 Benchmark)": simulate_spy_vibe(spy_bars, "buy_hold", 25000.0),
-    }
+    spy_vibe_results = {}
+    for sname, smode in [
+        ("SPY-Vibe-LongCash (SPY >= 20-SMA)", "long_cash"),
+        ("SPY-Vibe-LongShort (SPY vs 20-SMA)", "long_short"),
+        ("SPY Buy & Hold Benchmark", "buy_hold"),
+    ]:
+        sr = simulate_spy_vibe(spy_bars, smode, 25000.0)
+        stlog = sr.pop("trade_log")
+        spy_vibe_results[sname] = sr
+        variant_trades[sname] = {"group": "spy_vibe", **sr, "trade_log": stlog}
+        used_tids.add("SPY_VIBE")
 
     payload = {
         "window": f"{WIN_START} to {WIN_END}",
@@ -647,6 +706,14 @@ def main():
         "variants": results,
     }
     OUT_PATH.write_text(json.dumps(payload, indent=2) + "\n")
+
+    trades_payload = {
+        "window": f"{WIN_START} to {WIN_END}",
+        "tweets": {tid: tweet_lookup[tid] for tid in sorted(used_tids) if tid in tweet_lookup},
+        "variants": variant_trades,
+    }
+    TRADES_OUT_PATH.write_text(json.dumps(trades_payload, separators=(",", ":")))
+    print(f"Wrote {TRADES_OUT_PATH} ({TRADES_OUT_PATH.stat().st_size / 1024:.1f} KB, {len(variant_trades)} variants, {len(trades_payload['tweets'])} unique tweets)")
 
     print(f"1-YEAR SUMMARY: {total_rows} tweets -> {orig_rows} original -> {len(tweet_events)} priced directional signals | {len(mkt_events)} market-only breakdowns")
     print("\n--- S&P 500 VIBE CHECK BENCHMARKS ($25k) ---")

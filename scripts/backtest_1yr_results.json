@@ -5,7 +5,7 @@
   "extracted_directional_signals": 937,
   "market_only_breakdown_signals": 105,
   "spy_vibe_benchmarks": {
-    "SPY-Vibe-LongCash (SPY >= 20-SMA -> Long, else Cash)": {
+    "SPY-Vibe-LongCash (SPY >= 20-SMA)": {
       "trades": 20,
       "wins": 2,
       "losses": 18,
@@ -16,7 +16,7 @@
       "pf": 0.74,
       "max_dd_pct": -11.64
     },
-    "SPY-Vibe-LongShort (SPY >= 20-SMA -> Long, < 20-SMA -> Short)": {
+    "SPY-Vibe-LongShort (SPY vs 20-SMA)": {
       "trades": 40,
       "wins": 4,
       "losses": 36,
@@ -27,7 +27,7 @@
       "pf": 0.58,
       "max_dd_pct": -22.9
     },
-    "SPY-BuyHold (1-Year S&P 500 Benchmark)": {
+    "SPY Buy & Hold Benchmark": {
       "trades": 1,
       "wins": 1,
       "losses": 0,
