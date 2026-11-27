@@ -602,6 +602,13 @@ def main():
         ("Shlomo-Sniper", "shlomo", tweet_events, {"shlomo_min_score": 5.50, "min_entry_quality": 4.5, "min_conflict_check": 5.0, "bypass_market_filters": True, "sizing_mode": "fixed_cash", "cash_per_trade": 5000, "cash_cap": 25000, "leverage": 2.0, "profit_target_pct": 0.20, "max_hold_days": 5}),
         ("Shlomo-Tiered", "shlomo", tweet_events, {"shlomo_min_score": 5.0, "bypass_market_filters": True, "sizing_mode": "shlomo_tiered", "max_hold_days": 20}),
 
+        # Shlomo 8-Metrics + Variant K's 2 Priced-In Filters (Rule 2 Gap > +3% + Tape Confirmation; NO ATR, NO SPY)
+        ("Shlomo-3.0-PI (+ K Priced-In)", "shlomo_pi", tweet_events, {"shlomo_min_score": 3.0, "skip_long_gap_gt_3": True, "tape_confirm": True, "bypass_market_filters": True, "sizing_mode": "fixed_cash", "cash_per_trade": 5000, "max_hold_days": 5}),
+        ("Shlomo-5.25-PI (+ K Priced-In)", "shlomo_pi", tweet_events, {"shlomo_min_score": 5.25, "skip_long_gap_gt_3": True, "tape_confirm": True, "bypass_market_filters": True, "sizing_mode": "fixed_cash", "cash_per_trade": 5000, "max_hold_days": 5}),
+        ("Shlomo-5.50-PI (+ K Priced-In)", "shlomo_pi", tweet_events, {"shlomo_min_score": 5.50, "skip_long_gap_gt_3": True, "tape_confirm": True, "bypass_market_filters": True, "sizing_mode": "fixed_cash", "cash_per_trade": 5000, "max_hold_days": 5}),
+        ("Shlomo-Sniper-PI (+ K Priced-In)", "shlomo_pi", tweet_events, {"shlomo_min_score": 5.50, "min_entry_quality": 4.5, "min_conflict_check": 5.0, "skip_long_gap_gt_3": True, "tape_confirm": True, "bypass_market_filters": True, "sizing_mode": "fixed_cash", "cash_per_trade": 5000, "cash_cap": 25000, "leverage": 2.0, "profit_target_pct": 0.20, "max_hold_days": 5}),
+        ("Shlomo-Tiered-PI (+ K Priced-In)", "shlomo_pi", tweet_events, {"shlomo_min_score": 5.0, "skip_long_gap_gt_3": True, "tape_confirm": True, "bypass_market_filters": True, "sizing_mode": "shlomo_tiered", "max_hold_days": 20}),
+
         # Market-Only vs Tweets-Only Ablations (6)
         ("Variant R-MKT", "ablation", mkt_events, {"min_atr_pct": 3.2, "sizing_mode": "fixed_cash", "cash_per_trade": 5000, "cash_cap": 25000, "leverage": 2.0, "profit_target_pct": 0.20, "max_hold_days": 20}),
         ("Variant Q-MKT", "ablation", mkt_events, {"min_atr_pct": 3.2, "sizing_mode": "fixed_cash", "cash_per_trade": 5000, "cash_cap": 30000, "profit_target_pct": 0.20, "day5_dead_money_cut": True, "max_hold_days": 20}),
